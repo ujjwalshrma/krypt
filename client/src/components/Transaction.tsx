@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import useFetch from '../hooks/useFetch'
 import { TransactionContext } from '../context/TransactionsContext'
-
-import dummydata from '../utils/dummyData'
 import { shortenAddress } from '../utils/shortenAddress'
 
 interface TransactionCardProps {
@@ -22,7 +20,6 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
   amount,
   keyword,
 }) => {
-
   const gifUrl = useFetch({ keyword })
 
   return (
@@ -42,21 +39,29 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <p className="text-white text-base">From: {shortenAddress(addressFrom)}</p>
+            <p className="text-white text-base">
+              From: {shortenAddress(addressFrom)}
+            </p>
           </a>
           <a
             href={`https://ropsten.etherscan.io/address/${addressTo}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <p className="text-white text-base">To: {shortenAddress(addressTo)}</p>
+            <p className="text-white text-base">
+              To: {shortenAddress(addressTo)}
+            </p>
           </a>
           <p className="text-white text-base">Amount: {amount}ETH</p>
           {message && (
-            <p className='text-white text-base'>Message: {message}</p>
+            <p className="text-white text-base">Message: {message}</p>
           )}
         </div>
-        <img src={gifUrl || keyword} alt="gif" className='w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover' />
+        <img
+          src={gifUrl || keyword}
+          alt="gif"
+          className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
+        />
 
         <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
           <p className="text-[#37C7DA] font-bold">{timestamp}</p>
@@ -83,9 +88,11 @@ const Transactions: React.FC = () => {
         )}
 
         <div className="flex flex-wrap justify-center items-center mt-10">
-          {transactionContext!.transactions?.reverse().map((transaction: any, index: any) => (
-            <TransactionCard key={index} {...transaction} />
-          ))}
+          {transactionContext!.transactions
+            ?.reverse()
+            .map((transaction: any, index: any) => (
+              <TransactionCard key={index} {...transaction} />
+            ))}
         </div>
       </div>
     </div>
